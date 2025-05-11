@@ -17,7 +17,7 @@ permissions:
   contents: read
   pull-requests: write
 jobs:
-  action-lint:
+  ansible-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Run YAML Linters
