@@ -1,0 +1,45 @@
+---
+name: Pre Commit Checks
+description: Runs ansible-lint action to check for code quality and style issues
+author: 'Nanda Bala'
+inputs:
+  python_version:
+    description: 'Python version to use'
+    required: false
+    default: '3.13.0'
+  yamllint_config:
+    description: 'relative path to yamllint config file'
+    required: false
+    default: '${{ github.action_path }}/.github/actions/yaml-lint/.yamllint'
+runs:
+  using: "composite"
+  steps:
+    - name: Set PYTHON Version
+      shell: bash
+      run: |-
+        {
+          PYTHON_VERSION=${{ inputs.python_version }}"
+        } >> "$GITHUB_ENV"
+    - name: Checkout code
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4
+    - name: Set up Python
+      uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    - name: Prepare configurations
+      shell: bash
+      run: |-
+        mkdir -p /tmp
+        cp -f ${{ inputs.yamllint_config }} /tmp/.yamllint
+    - name: Set up yamllint
+      shell: bash
+      run: |-
+        pip install yamllint
+    - name: Lint yaml files
+      shell: bash
+      run: |-
+        yamllint -c "${{ inputs.yamllint_config }}" "${{ github.workspace }}"
+
+branding:
+  icon: 'check'
+  color: 'blue'

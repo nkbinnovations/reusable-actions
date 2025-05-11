@@ -1,0 +1,30 @@
+---
+name: Pull Request Labeler
+run-name: "${{ github.actor }} has triggered the ${{ github.workflow }} workflow"
+on:
+  pull_request:
+    types:
+      - unlabeled
+      - labeled
+      - synchronize
+      - opened
+      - reopened
+      - edited
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}  # This is the concurrency group name and should be unique per pull request
+  cancel-in-progress: ${{ !contains(github.ref, 'release/')}}  # Cancel previous runs if a new run is triggered on a non-release branch
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  id-token: write
+jobs:
+  action-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Pull Request Labels
+        id: labeler
+        uses: nkbinnovations/reusable-actions/.github/actions/labeler@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labeler_config: ${{ github.workspace }}/.github/actions/labeler/labeler.yaml

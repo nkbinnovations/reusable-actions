@@ -1,0 +1,28 @@
+---
+name: yaml-linting
+run-name: "${{ github.actor }} has triggered the ${{ github.workflow }} workflow"
+on:
+  pull_request:
+    types:
+      - unlabeled
+      - labeled
+      - synchronize
+      - opened
+      - reopened
+      - edited
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}  # This is the concurrency group name and should be unique per pull request
+  cancel-in-progress: ${{ !contains(github.ref, 'release/')}}  # Cancel previous runs if a new run is triggered on a non-release branch
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  action-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run YAML Linters
+        id: yaml-lint
+        uses: nkbinnovations/reusable-actions/.github/actions/yaml-lint@main
+        with:
+          python_version: '3.13.0'
+          yamllint_config: ${{ github.workspace }}/.github/actions/pre-commit/.yamllint

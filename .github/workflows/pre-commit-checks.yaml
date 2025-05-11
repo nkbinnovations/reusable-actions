@@ -1,0 +1,31 @@
+---
+name: pre-commit-checks
+run-name: "${{ github.actor }} has triggered the ${{ github.workflow }} workflow"
+on:
+  pull_request:
+    types:
+      - unlabeled
+      - labeled
+      - synchronize
+      - opened
+      - reopened
+      - edited
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}  # This is the concurrency group name and should be unique per pull request
+  cancel-in-progress: ${{ !contains(github.ref, 'release/')}}  # Cancel previous runs if a new run is triggered on a non-release branch
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  action-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Pre-Commit Checks
+        id: pre-commit
+        uses: nkbinnovations/reusable-actions/.github/actions/pre-commit@main
+        with:
+          python_version: '3.13.0'
+          action_lint_config: ${{ github.workspace }}/.github/actions/pre-commit/.actionlint.yaml
+          yamlfmt_config: ${{ github.workspace }}/.github/actions/pre-commit/.yamlfmt
+          yamllint_config: ${{ github.workspace }}/.github/actions/pre-commit/.yamllint
+          pre_commit_config: ${{ github.workspace }}/.github/actions/pre-commit/.pre-commit-config.yaml

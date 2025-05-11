@@ -1,0 +1,24 @@
+---
+name: Pull Request Labeler
+description: Label Action
+author: 'Nanda Bala'
+inputs:
+  # The token to use for authentication. This token is used to authenticate with the GitHub API and is required for the action to work.
+  github_token:
+    description: The token to use for authentication. This token is used to authenticate with the GitHub API and is required for the action to work.
+    required: true
+  labeler_config:
+    description: The path to the labeler configuration file. This file contains the rules for labeling pull requests and is required for the action to work.
+    required: true
+    default: '${{ github.action_path }}/labeler.yaml'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/labeler@8558fd74291d67161a8a78ce36a881fa63b766a9
+      with:
+        repo-token: ${{ inputs.github_token }}
+        configuration-path: ${{ inputs.labeler_config }}
+
+branding:
+  icon: 'check'
+  color: 'blue'
