@@ -48,7 +48,6 @@ runs:
       shell: bash
       run: |-
         pre-commit run --color auto --config /tmp/.pre-commit-config.yaml --all-files --verbose;
-
 branding:
   icon: 'check'
   color: 'blue'

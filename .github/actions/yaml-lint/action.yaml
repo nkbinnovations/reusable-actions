@@ -32,7 +32,6 @@ runs:
       shell: bash
       run: |-
         yamllint -c "/tmp/.yamllint" "${{ github.workspace }}"
-
 branding:
   icon: 'check'
   color: 'blue'

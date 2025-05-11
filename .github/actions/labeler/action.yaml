@@ -17,7 +17,6 @@ runs:
       with:
         repo-token: ${{ inputs.github_token }}
         configuration-path: ${{ inputs.labeler_config != '' && inputs.labeler_config || format('{0}/labeler.yaml', github.action_path) }}
-
 branding:
   icon: 'check'
   color: 'blue'

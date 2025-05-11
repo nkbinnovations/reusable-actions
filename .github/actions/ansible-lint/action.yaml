@@ -21,7 +21,6 @@ inputs:
     description: 'relative path to ansible directory'
     required: false
     default: '.'
-
 runs:
   using: "composite"
   steps:
@@ -44,7 +43,6 @@ runs:
         args: "--config-file /tmp/.ansible-lint.yaml --force-color ${{ inputs.ansible_lint_args}}"
         working_directory: "${{ github.workspace }}/${{ inputs.ansible_directory }}"
         requirements_file: "/tmp/requirements.yaml"
-
 branding:
   icon: 'check'
   color: 'blue'
