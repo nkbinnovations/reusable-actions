@@ -8,6 +8,7 @@
 
 This repository contains several GitHub Actions workflows for linting and other automated checks. Below is a brief description of each workflow:
 
+
 ### ansible-lint
   * Runs the Lint on the ansible configurations to verify the syntax in the user repository
 
