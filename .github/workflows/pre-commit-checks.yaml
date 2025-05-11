@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Run Pre-Commit Checks
         id: pre-commit
-        uses: nkbinnovations/reusable-actions/.github/actions/pre-commit@feature-test-workflow
+        uses: nkbinnovations/reusable-actions/.github/actions/pre-commit@v1
         with:
           python_version: '3.13.0'
           action_lint_config: ${{ github.workspace }}/.github/actions/pre-commit/.actionlint.yaml

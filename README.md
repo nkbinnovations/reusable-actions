@@ -1,10 +1,9 @@
 # reusable-actions
 
-[![pre-commit-checks](https://github.com/nkbinnovations/reusable-actions/workflows/pre-commit-checks.yaml/badge.svg)](https://github.com/nkbinnovations/reusable-actions/workflows/pre-commit-checks.yaml)
-[![ansible-lint](https://github.com/nkbinnovations/reusable-actions/workflows/ansible-lint.yaml/badge.svg)](https://github.com/nkbinnovations/reusable-actions/workflows/ansible-lint.yaml)
-[![labeler](https://github.com/nkbinnovations/reusable-actions/workflows/labeler.yaml/badge.svg)](https://github.com/nkbinnovations/reusable-actions/workflows/labeler.yaml)
-[![yaml-lint](https://github.com/nkbinnovations/reusable-actions/workflows/yaml-lint.yaml/badge.svg)](https://github.com/nkbinnovations/reusable-actions/workflows/yaml-lint.yaml)
-
+[![pre-commit-checks](https://github.com/nkbinnovations/reusable-actions/actions/workflows/pre-commit-checks.yaml/badge.svg)](https://github.com/nkbinnovations/reusable-actions/actions/workflows/pre-commit-checks.yaml)
+[![ansible-lint](https://github.com/nkbinnovations/reusable-actions/actions/workflows/ansible-lint.yaml/badge.svg)](https://github.com/nkbinnovations/reusable-actions/actions/workflows/ansible-lint.yaml)
+[![Pull Request Labeler](https://github.com/nkbinnovations/reusable-actions/actions/workflows/labeler.yaml/badge.svg)](https://github.com/nkbinnovations/reusable-actions/actions/workflows/labeler.yaml)
+[![yaml-lint](https://github.com/nkbinnovations/reusable-actions/actions/workflows/yaml-lint.yaml/badge.svg)](https://github.com/nkbinnovations/reusable-actions/actions/workflows/yaml-lint.yaml)
 ## GitHub Actions
 
 This repository contains several GitHub Actions workflows for linting and other automated checks. Below is a brief description of each workflow:
