@@ -24,6 +24,6 @@ jobs:
     steps:
       - name: Create Pull Request Labels
         id: labeler
-        uses: nkbinnovations/reusable-actions/.github/actions/labeler@main
+        uses: nkbinnovations/reusable-actions/.github/actions/labeler@feature-test-workflow
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

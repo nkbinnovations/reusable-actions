@@ -22,6 +22,6 @@ jobs:
     steps:
       - name: Run YAML Linters
         id: ansible-lint
-        uses: nkbinnovations/reusable-actions/.github/actions/ansible-lint@main
+        uses: nkbinnovations/reusable-actions/.github/actions/ansible-lint@feature-test-workflow
         with:
           python_version: '3.13.0'
