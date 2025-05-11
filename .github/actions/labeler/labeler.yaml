@@ -4,7 +4,6 @@ enhancement:
   - head-branch:
       - '^feature-.*'
       - '^feat-.*'
-
 # Add 'bug' label to any PR that is opened from a 'bug', `bugfix`, or 'hotfix' branch
 bug:
   - head-branch:
@@ -12,7 +11,6 @@ bug:
       - '^bugfix-.*'
       - '^hotfix-.*'
       - '^fix-.*'
-
 # Add 'documentation' label to any changes within 'docs' folder or any subfolders or to .md files within the entire repository
 documentation:
   - changed-files:
@@ -22,38 +20,32 @@ documentation:
           - '*.md'
   - head-branch:
       - '^docs-.*'
-
 # Add 'branchnaming' label to any PR that is opened from a 'standard' branch naming pattern
 branchnaming:
   - head-branch:
       - '^(?!.*(?:^bug-.*|^bugfix-.*|^hotfix-.*|^fix-.*|^feature-.*|^feat-.*|^master|^main|^docs-.*|^dependabot/.*)).*$'
-
 # Add 'label-config' label to any PR that has changes to label configuration file
 label-config:
   - changed-files:
       - any-glob-to-any-file:
           - '.github/actions/labeler/labeler.yaml'
-
 # Add 'terraform-config' label to any PR that has changes to 'terraform' folder or any subfolders
 terraform-config:
   - changed-files:
       - any-glob-to-any-file:
           - 'terraform/**'
           - '**/*.tf'
-
 # Add 'ansible-config' label to any PR that has changes to 'ansible' folder or any subfolders
 ansible-config:
   - changed-files:
       - any-glob-to-any-file:
           - 'ansible/**'
-
 # Add 'packer-config' label to any PR that has changes to 'packer' folder or any subfolders
 packer-config:
   - changed-files:
       - any-glob-to-any-file:
           - 'packer/**'
           - '**/*.pkr.hcl'
-
 # Add 'docker-config' label to any PR that has changes to 'docker' folder or any subfolders
 docker-config:
   - changed-files:
@@ -64,19 +56,16 @@ docker-config:
           - '**/docker-compose-*.yml'
           - '**/docker-compose.yaml'
           - '**/docker-compose-*.yaml'
-
 # Add 'workflow-config' label to any PR that has changes to '.github/workflows' folder or any subfolders
 workflow-config:
   - changed-files:
       - any-glob-to-any-file:
           - '.github/workflows/**'
-
 # Add 'actions-config' label to any PR that has changes to '.github/actions' folder or any subfolders
 actions-config:
   - changed-files:
       - any-glob-to-any-file:
           - '.github/actions/**'
-
 # Add 'jenkins-config' label to any PR that has changes to 'jenkins' folder or any subfolders
 jenkins-config:
   - changed-files:
@@ -84,7 +73,6 @@ jenkins-config:
           - 'pipelines/**'
           - '**/Jenkinsfile'
           - '**/**.jenkinsfile'
-
 # Add 'java-config' label to any PR that has changes to application configuration files
 java-config:
   - changed-files:
@@ -98,7 +86,6 @@ java-config:
           - '**/application-*.yml'
           - '**/application.yaml'
           - '**/application-*.yaml'
-
 # Add 'java-code' label to any PR that has changes to Java code files
 java-code:
   - changed-files:

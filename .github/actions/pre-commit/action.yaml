@@ -10,28 +10,24 @@ inputs:
   action_lint_config:
     description: 'Path to actionlint config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/pre-commit/.actionlint.yaml'
   yamlfmt_config:
     description: 'Path to yamlfmt config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/pre-commit/.yamlfmt'
   yamllint_config:
     description: 'Path to yamllint config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/pre-commit/.yamllint'
   pre_commit_config:
     description: 'Path to pre-commit config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/pre-commit/.pre-commit-config.yaml'
 runs:
   using: "composite"
   steps:
-    - name: Set PYTHON Version
-      shell: bash
-      run: |-
-        {
-          PYTHON_VERSION="${{ inputs.python_version }}"
-        } >> "$GITHUB_ENV"
+    - name: Checkout code
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4
+    - name: Set up Python
+      uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5
+      with:
+        python-version: ${{ inputs.python_version }}
     - name: Install python dependencies
       shell: bash
       run: |-
@@ -40,25 +36,18 @@ runs:
         else
           python -m pip install pre-commit
         fi
-    - name: Checkout code
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4
-    - name: Set up Python
-      uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
     - name: Prepare configurations
       shell: bash
       run: |-
         mkdir -p /tmp
-        cp -f ${{ inputs.action_lint_config }} /tmp/.actionlint.yaml
-        cp -f ${{ inputs.yamlfmt_config }} /tmp/.yamlfmt
-        cp -f ${{ inputs.yamllint_config }} /tmp/.yamllint
-        cp -f ${{ inputs.pre_commit_config }} /tmp/.pre-commit-config.yaml
+        cp -f ${{ inputs.action_lint_config != '' && inputs.action_lint_config || format('{0}/.actionlint.yaml', github.action_path) }} /tmp/.actionlint.yaml
+        cp -f ${{ inputs.yamlfmt_config != '' && inputs.yamlfmt_config || format('{0}/.yamlfmt', github.action_path) }} /tmp/.yamlfmt
+        cp -f ${{ inputs.yamllint_config != '' && inputs.yamllint_config || format('{0}/.yamllint', github.action_path) }} /tmp/.yamllint
+        cp -f ${{ inputs.pre_commit_config != '' && inputs.pre_commit_config || format('{0}/.pre-commit-config.yaml', github.action_path) }} /tmp/.pre-commit-config.yaml
     - name: Run pre-commit
       shell: bash
       run: |-
         pre-commit run --color auto --config /tmp/.pre-commit-config.yaml --all-files --verbose;
-
 branding:
   icon: 'check'
   color: 'blue'

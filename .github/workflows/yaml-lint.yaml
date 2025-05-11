@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Run YAML Linters
         id: yaml-lint
-        uses: nkbinnovations/reusable-actions/.github/actions/yaml-lint@main
+        uses: nkbinnovations/reusable-actions/.github/actions/yaml-lint@v1
         with:
           python_version: '3.13.0'
           yamllint_config: ${{ github.workspace }}/.github/actions/pre-commit/.yamllint

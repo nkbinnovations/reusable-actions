@@ -23,7 +23,6 @@ repos:
         files: ^\.github/workflows/
         entry: actionlint
         minimum_pre_commit_version: 3.0.0
-
   - repo: https://github.com/google/yamlfmt.git
     rev: v0.16.0
     hooks:
