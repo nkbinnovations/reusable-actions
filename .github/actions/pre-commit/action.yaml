@@ -10,28 +10,28 @@ inputs:
   action_lint_config:
     description: 'Path to actionlint config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/pre-commit/.actionlint.yaml'
+    default: '${{ github.action_path }}/.actionlint.yaml'
   yamlfmt_config:
     description: 'Path to yamlfmt config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/pre-commit/.yamlfmt'
+    default: '${{ github.action_path }}/.yamlfmt'
   yamllint_config:
     description: 'Path to yamllint config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/pre-commit/.yamllint'
+    default: '${{ github.action_path }}/.yamllint'
   pre_commit_config:
     description: 'Path to pre-commit config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/pre-commit/.pre-commit-config.yaml'
+    default: '${{ github.action_path }}/.pre-commit-config.yaml'
 runs:
   using: "composite"
   steps:
-    - name: Set PYTHON Version
-      shell: bash
-      run: |-
-        {
-          PYTHON_VERSION="${{ inputs.python_version }}"
-        } >> "$GITHUB_ENV"
+    - name: Checkout code
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4
+    - name: Set up Python
+      uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5
+      with:
+        python-version: ${{ inputs.python_version }}
     - name: Install python dependencies
       shell: bash
       run: |-
@@ -40,12 +40,6 @@ runs:
         else
           python -m pip install pre-commit
         fi
-    - name: Checkout code
-      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4
-    - name: Set up Python
-      uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5
-      with:
-        python-version: ${{ env.PYTHON_VERSION }}
     - name: Prepare configurations
       shell: bash
       run: |-
