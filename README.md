@@ -23,7 +23,7 @@ This repository contains several GitHub Actions workflows for linting and other 
 
   - **ansible_directory:** *(optional)*
 
-    Relative ansible folder path of the ansible configuration folders in the user repository. `default('ansible')`
+    Relative ansible folder path of the ansible configuration folders in the user repository. `default('${{ github.workspace }}')`
 
   - **ansible_lint_config:** *(optional)*
 
