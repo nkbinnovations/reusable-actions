@@ -10,11 +10,11 @@ inputs:
   ansible_lint_config:
     description: 'relative path to ansible lint config file'
     required: false
-    default: '${{ github.action_path }}/.github/actions/ansible-lint/.ansible-lint.yaml'
+    default: '${{ github.action_path }}/.ansible-lint.yaml'
   ansible_requirements_file:
     description: 'ansible requirements file for role and collection dependencies'
     required: false
-    default: '${{ github.action_path }}/.github/actions/ansible-lint/requirements.yml'
+    default: '${{ github.action_path }}/requirements.yml'
   ansible_extra_args:
     description: 'List of extra arguments to pass to ansible-lint'
     required: false
