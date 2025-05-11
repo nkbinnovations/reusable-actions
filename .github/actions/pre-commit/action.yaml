@@ -30,7 +30,7 @@ runs:
       shell: bash
       run: |-
         {
-          PYTHON_VERSION=${{ inputs.python_version }}"
+          PYTHON_VERSION="${{ inputs.python_version }}"
         } >> "$GITHUB_ENV"
     - name: Install python dependencies
       shell: bash

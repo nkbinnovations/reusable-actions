@@ -17,7 +17,7 @@ permissions:
   contents: read
   pull-requests: write
 jobs:
-  action-lint:
+  ansible-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Run YAML Linters
@@ -25,4 +25,3 @@ jobs:
         uses: nkbinnovations/reusable-actions/.github/actions/ansible-lint@main
         with:
           python_version: '3.13.0'
-          yamllint_config: ${{ github.workspace }}/.github/actions/pre-commit/.yamllint

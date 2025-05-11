@@ -19,7 +19,7 @@ permissions:
   issues: write
   id-token: write
 jobs:
-  action-lint:
+  labeler:
     runs-on: ubuntu-latest
     steps:
       - name: Create Pull Request Labels

@@ -18,7 +18,7 @@ runs:
       shell: bash
       run: |-
         {
-          PYTHON_VERSION=${{ inputs.python_version }}"
+          PYTHON_VERSION="${{ inputs.python_version }}"
         } >> "$GITHUB_ENV"
     - name: Checkout code
       uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4
