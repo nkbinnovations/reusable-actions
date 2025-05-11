@@ -10,7 +10,6 @@ inputs:
   yamllint_config:
     description: 'relative path to yamllint config file'
     required: false
-    default: '${{ github.action_path }}/.yamllint'
 runs:
   using: "composite"
   steps:
@@ -24,7 +23,7 @@ runs:
       shell: bash
       run: |-
         mkdir -p /tmp
-        cp -f ${{ inputs.yamllint_config }} /tmp/.yamllint
+        cp -f ${{ inputs.yamllint_config != '' && inputs.yamllint_config || format('{0}/.yamllint', github.action_path }} /tmp/.yamllint
     - name: Set up yamllint
       shell: bash
       run: |-
@@ -32,7 +31,7 @@ runs:
     - name: Lint yaml files
       shell: bash
       run: |-
-        yamllint -c "${{ inputs.yamllint_config }}" "${{ github.workspace }}"
+        yamllint -c "/tmp/.yamllint" "${{ github.workspace }}"
 
 branding:
   icon: 'check'

@@ -10,19 +10,15 @@ inputs:
   action_lint_config:
     description: 'Path to actionlint config file'
     required: false
-    default: '${{ github.action_path }}/.actionlint.yaml'
   yamlfmt_config:
     description: 'Path to yamlfmt config file'
     required: false
-    default: '${{ github.action_path }}/.yamlfmt'
   yamllint_config:
     description: 'Path to yamllint config file'
     required: false
-    default: '${{ github.action_path }}/.yamllint'
   pre_commit_config:
     description: 'Path to pre-commit config file'
     required: false
-    default: '${{ github.action_path }}/.pre-commit-config.yaml'
 runs:
   using: "composite"
   steps:
@@ -44,10 +40,10 @@ runs:
       shell: bash
       run: |-
         mkdir -p /tmp
-        cp -f ${{ inputs.action_lint_config }} /tmp/.actionlint.yaml
-        cp -f ${{ inputs.yamlfmt_config }} /tmp/.yamlfmt
-        cp -f ${{ inputs.yamllint_config }} /tmp/.yamllint
-        cp -f ${{ inputs.pre_commit_config }} /tmp/.pre-commit-config.yaml
+        cp -f ${{ inputs.action_lint_config != '' && inputs.action_lint_config || format('{0}/.actionlint.yaml', github.action_path) }} /tmp/.actionlint.yaml
+        cp -f ${{ inputs.yamlfmt_config != '' && inputs.yamlfmt_config || format('{0}/.yamlfmt', github.action_path) }} /tmp/.yamlfmt
+        cp -f ${{ inputs.yamllint_config != '' && inputs.yamllint_config || format('{0}/.yamllint', github.action_path) }} /tmp/.yamllint
+        cp -f ${{ inputs.pre_commit_config != '' && inputs.pre_commit_config || format('{0}/.pre-commit-config.yaml', github.action_path) }} /tmp/.pre-commit-config.yaml
     - name: Run pre-commit
       shell: bash
       run: |-

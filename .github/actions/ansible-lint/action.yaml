@@ -10,11 +10,9 @@ inputs:
   ansible_lint_config:
     description: 'relative path to ansible lint config file'
     required: false
-    default: '${{ github.action_path }}/.ansible-lint.yaml'
   ansible_requirements_file:
     description: 'ansible requirements file for role and collection dependencies'
     required: false
-    default: '${{ github.action_path }}/requirements.yml'
   ansible_extra_args:
     description: 'List of extra arguments to pass to ansible-lint'
     required: false
@@ -22,7 +20,7 @@ inputs:
   ansible_directory:
     description: 'relative path to ansible directory'
     required: false
-    default: 'ansible'
+    default: '.'
 
 runs:
   using: "composite"
@@ -37,8 +35,8 @@ runs:
       shell: bash
       run: |-
         mkdir -p /tmp
-        cp -f ${{ inputs.ansible_requirements_file }} /tmp/requirements.yaml
-        cp -f ${{ inputs.ansible_lint_config }} /tmp/.ansible-lint.yaml
+        cp -f ${{ inputs.ansible_requirements_file != '' && inputs.ansible_requirements_file || format('{0}/requirements.yaml', github.action_path) }} /tmp/requirements.yaml
+        cp -f ${{ inputs.ansible_lint_config != '' && inputs.ansible_lint_config || format('{0}/.ansible-lint.yaml', github.action_path) }} /tmp/.ansible-lint.yaml
     - name: Run ansible-lint
       uses: ansible/ansible-lint@e918e02374cc9148abfe6d0fa04417ee89f0def9  # v25
       with:

@@ -9,15 +9,14 @@ inputs:
     required: true
   labeler_config:
     description: The path to the labeler configuration file. This file contains the rules for labeling pull requests and is required for the action to work.
-    required: true
-    default: '${{ github.action_path }}/labeler.yaml'
+    required: false
 runs:
   using: "composite"
   steps:
     - uses: actions/labeler@8558fd74291d67161a8a78ce36a881fa63b766a9
       with:
         repo-token: ${{ inputs.github_token }}
-        configuration-path: ${{ inputs.labeler_config }}
+        configuration-path: ${{ inputs.labeler_config != '' && inputs.labeler_config || format('{0}/labeler.yaml', github.action_path) }}
 
 branding:
   icon: 'check'
