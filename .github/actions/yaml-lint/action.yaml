@@ -23,7 +23,7 @@ runs:
       shell: bash
       run: |-
         mkdir -p /tmp
-        cp -f ${{ inputs.yamllint_config != '' && inputs.yamllint_config || format('{0}/.yamllint', github.action_path }} /tmp/.yamllint
+        cp -f ${{ inputs.yamllint_config != '' && inputs.yamllint_config || format('{0}/.yamllint', github.action_path) }} /tmp/.yamllint
     - name: Set up yamllint
       shell: bash
       run: |-
